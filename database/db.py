@@ -31,6 +31,21 @@ def get_db():
     return conn
 
 
+def get_user_by_email(email):
+    """Return the user row for an email, or None if no account matches.
+
+    Used by login to look up a candidate account before verifying the
+    password. Email is UNIQUE, so at most one row is returned.
+    """
+    conn = get_db()
+    try:
+        return conn.execute(
+            "SELECT * FROM users WHERE email = ?", (email,)
+        ).fetchone()
+    finally:
+        conn.close()
+
+
 def init_db():
     """Create the users and expenses tables if they don't already exist."""
     conn = get_db()
