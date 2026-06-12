@@ -2,39 +2,62 @@
 
 {% block title %}Sign in — Spendly{% endblock %}
 
+{% block head %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/login.css') }}">
+{% endblock %}
+
 {% block content %}
 
-<section class="auth-section">
-    <div class="auth-container">
+<section class="login-section">
+    <div class="login-card">
 
-        <div class="auth-header">
-            <h1 class="auth-title">Welcome back</h1>
-            <p class="auth-subtitle">Sign in to your Spendly account</p>
+        <div class="login-brand">
+            <span class="login-brand-icon"><i data-lucide="wallet"></i></span>
         </div>
 
-        <div class="auth-card">
-            {% if error %}
-            <div class="auth-error">{{ error }}</div>
-            {% endif %}
+        <div class="login-header">
+            <p class="login-subtitle">Sign in to continue to Spendly</p>
+        </div>
 
-            <form method="POST" action="{{ url_for('login') }}">
-                <div class="form-group">
-                    <label for="email">Email address</label>
+        {% if error %}
+        <div class="login-error" role="alert">
+            <i data-lucide="alert-circle"></i>
+            <span>{{ error }}</span>
+        </div>
+        {% endif %}
+
+        <form method="POST" action="{{ url_for('login') }}" class="login-form">
+            <div class="login-field">
+                <label for="email">Email address</label>
+                <div class="login-input-wrap">
+                    <i data-lucide="mail" class="login-input-icon"></i>
                     <input type="email" id="email" name="email"
-                           class="form-input" placeholder="nitish@example.com"
+                           class="login-input" placeholder="you@example.com"
                            required autofocus>
                 </div>
-                <div class="form-group">
-                    <label for="password">Password</label>
-                    <input type="password" id="password" name="password"
-                           class="form-input" placeholder="Your password"
-                           required>
-                </div>
-                <button type="submit" class="btn-submit">Sign in</button>
-            </form>
-        </div>
+            </div>
 
-        <p class="auth-switch">
+            <div class="login-field">
+                <label for="password">Password</label>
+                <div class="login-input-wrap">
+                    <i data-lucide="lock" class="login-input-icon"></i>
+                    <input type="password" id="password" name="password"
+                           class="login-input" placeholder="Your password"
+                           required>
+                    <button type="button" class="login-toggle"
+                            id="togglePassword" aria-label="Show password">
+                        <i data-lucide="eye"></i>
+                    </button>
+                </div>
+            </div>
+
+            <button type="submit" class="login-submit">
+                <i data-lucide="log-in"></i>
+                <span>Sign in</span>
+            </button>
+        </form>
+
+        <p class="login-switch">
             Don't have an account?
             <a href="{{ url_for('register') }}">Create one free</a>
         </p>
@@ -42,4 +65,23 @@
     </div>
 </section>
 
+{% endblock %}
+
+{% block scripts %}
+<script src="https://unpkg.com/lucide@latest"></script>
+<script>
+    // Render Lucide icons on this page.
+    lucide.createIcons();
+
+    // Show/hide password toggle — swaps the input type and the eye icon.
+    const toggle = document.getElementById("togglePassword");
+    const password = document.getElementById("password");
+    toggle.addEventListener("click", () => {
+        const hidden = password.type === "password";
+        password.type = hidden ? "text" : "password";
+        toggle.setAttribute("aria-label", hidden ? "Hide password" : "Show password");
+        toggle.innerHTML = `<i data-lucide="${hidden ? "eye-off" : "eye"}"></i>`;
+        lucide.createIcons();
+    });
+</script>
 {% endblock %}
