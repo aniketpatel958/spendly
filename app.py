@@ -38,15 +38,15 @@ def landing():
 def register():
     # Already-authenticated users have no reason to see the signup page.
     if session.get("user_id"):
-        return redirect(url_for("landing"))
+        return redirect(url_for("profile"))
     return render_template("register.html")
 
 
 @app.route("/login", methods=["GET", "POST"])
 def login():
-    # Already-authenticated users have no reason to see the login page.
+    # Already-authenticated users land straight on their profile.
     if session.get("user_id"):
-        return redirect(url_for("landing"))
+        return redirect(url_for("profile"))
 
     if request.method == "POST":
         email = request.form.get("email", "")
@@ -55,7 +55,7 @@ def login():
         if user and check_password_hash(user["password_hash"], password):
             session["user_id"] = user["id"]
             session["user_name"] = user["name"]
-            return redirect(url_for("landing"))
+            return redirect(url_for("profile"))
         # Same message for unknown email and wrong password — no enumeration.
         return render_template("login.html", error="Invalid email or password")
 

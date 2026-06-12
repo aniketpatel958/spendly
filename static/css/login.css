@@ -1,0 +1,195 @@
+/* ------------------------------------------------------------------ */
+/* Login page — fintech-style sign-in card                             */
+/* Follows the spendly-ui-designer language: reuse existing tokens,    */
+/* card-based layout, soft shadow, restraint, Lucide icons.            */
+/* ------------------------------------------------------------------ */
+
+.login-section {
+    min-height: calc(100vh - 60px - 100px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 3rem 1.5rem;
+}
+
+.login-card {
+    width: 100%;
+    max-width: var(--auth-width);
+    background: var(--paper-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: 2.5rem 2rem;
+    /* Subtle elevation only — the skill caps shadows at this ceiling. */
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04), 0 8px 24px rgba(0, 0, 0, 0.05);
+}
+
+/* Brand mark ----------------------------------------------------------- */
+
+.login-brand {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 1.25rem;
+}
+
+.login-brand-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 48px;
+    height: 48px;
+    border-radius: var(--radius-md);
+    background: var(--accent-light);
+    color: var(--accent);
+}
+
+.login-brand-icon svg { width: 24px; height: 24px; }
+
+/* Header --------------------------------------------------------------- */
+
+.login-header {
+    text-align: center;
+    margin-bottom: 1.75rem;
+}
+
+.login-title {
+    font-family: var(--font-display);
+    font-size: 1.75rem;
+    color: var(--ink);
+    margin-bottom: 0.35rem;
+}
+
+.login-subtitle {
+    font-size: 0.9rem;
+    color: var(--ink-muted);
+}
+
+/* Error banner --------------------------------------------------------- */
+
+.login-error {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: var(--danger-light);
+    color: var(--danger);
+    border: 1px solid var(--danger);
+    border-radius: var(--radius-sm);
+    padding: 0.75rem 1rem;
+    font-size: 0.875rem;
+    margin-bottom: 1.25rem;
+}
+
+.login-error svg {
+    width: 18px;
+    height: 18px;
+    flex-shrink: 0;
+}
+
+/* Fields --------------------------------------------------------------- */
+
+.login-field { margin-bottom: 1.25rem; }
+
+.login-field label {
+    display: block;
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: var(--ink-soft);
+    margin-bottom: 0.4rem;
+}
+
+.login-input-wrap {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.login-input-icon {
+    position: absolute;
+    left: 0.875rem;
+    width: 18px;
+    height: 18px;
+    color: var(--ink-faint);
+    pointer-events: none;
+}
+
+.login-input {
+    width: 100%;
+    padding: 0.7rem 0.875rem 0.7rem 2.6rem;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    font-family: var(--font-body);
+    font-size: 0.95rem;
+    color: var(--ink);
+    background: var(--paper);
+    outline: none;
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.login-input:focus {
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px var(--accent-light);
+}
+
+.login-input::placeholder { color: var(--ink-faint); }
+
+/* Password show/hide toggle -------------------------------------------- */
+
+.login-toggle {
+    position: absolute;
+    right: 0.5rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.35rem;
+    background: none;
+    border: none;
+    color: var(--ink-faint);
+    cursor: pointer;
+    border-radius: var(--radius-sm);
+    transition: color 0.2s;
+}
+
+.login-toggle:hover { color: var(--ink-muted); }
+.login-toggle svg { width: 18px; height: 18px; }
+
+/* Submit --------------------------------------------------------------- */
+
+.login-submit {
+    width: 100%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 0.75rem;
+    background: var(--accent);
+    color: var(--paper-card);
+    border: none;
+    border-radius: var(--radius-sm);
+    font-family: var(--font-body);
+    font-size: 0.95rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s, transform 0.05s;
+    margin-top: 0.25rem;
+}
+
+.login-submit:hover { background: var(--ink); }
+.login-submit:active { transform: translateY(1px); }
+.login-submit svg { width: 18px; height: 18px; }
+
+/* Switch link ---------------------------------------------------------- */
+
+.login-switch {
+    text-align: center;
+    font-size: 0.875rem;
+    color: var(--ink-muted);
+    margin-top: 1.5rem;
+}
+
+.login-switch a {
+    color: var(--accent);
+    font-weight: 600;
+}
+
+@media (max-width: 480px) {
+    .login-card { padding: 2rem 1.25rem; }
+}
